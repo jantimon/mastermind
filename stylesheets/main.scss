@@ -1,2 +1,21 @@
 @import "bourbon/bourbon";
 @import "reset.scss";
+@import "marble";
+
+.peg {
+  @include marble();
+  @include size(5em 5em);
+
+  // Colors .peg.red .. .peg.black
+  $colorList: "red" #600, "purple" #336, "blue" #339, "yellow" #982, "orange" #831, "green" #361, "white" #999, "black" #222222;
+  @each $colorSet in $colorList {
+    $color: nth($colorSet, 2);
+    $name: nth($colorSet, 1);
+    &.#{$name} {
+      @include marble-color($color);
+      &:hover {
+        @include marble-color(darken($color, 10));
+      }
+    }
+  }
+}

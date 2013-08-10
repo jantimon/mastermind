@@ -40,3 +40,228 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0; }
+
+.peg {
+  /* marble-mixnin */
+  display: inline-block;
+  position: relative;
+  border-radius: 50%;
+  box-shadow: 1px 2px 1px rgba(25, 25, 25, 0.25);
+  overflow: hidden;
+  color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 5em;
+  height: 5em; }
+  .peg:before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    bottom: 2.5%;
+    left: 5%;
+    opacity: 0.6;
+    height: 100%;
+    width: 90%;
+    z-index: 2; }
+  .peg:after {
+    content: "";
+    width: 70%;
+    height: 50%;
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    border-radius: 50%; }
+  .peg.red {
+    background: #660000;
+    background-image: -webkit-radial-gradient(50% 120%,  circle cover, #670000, #660000 80%, #660000 100%);
+    background-image: radial-gradient( circle  at 50% 120%, #670000, #660000 80%, #660000 100%); }
+    .peg.red:before {
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+      background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+    .peg.red:after {
+      background-color: rgba(255, 255, 255, 0.4);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+      background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+      background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+    .peg.red:hover {
+      background: #330000;
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, #340000, #330000 80%, #330000 100%);
+      background-image: radial-gradient( circle  at 50% 120%, #340000, #330000 80%, #330000 100%); }
+      .peg.red:hover:before {
+        background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+        background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+      .peg.red:hover:after {
+        background-color: rgba(255, 255, 255, 0.4);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+        background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+        background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+  .peg.purple {
+    background: #333366;
+    background-image: -webkit-radial-gradient(50% 120%,  circle cover, #333367, #333366 80%, #333366 100%);
+    background-image: radial-gradient( circle  at 50% 120%, #333367, #333366 80%, #333366 100%); }
+    .peg.purple:before {
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+      background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+    .peg.purple:after {
+      background-color: rgba(255, 255, 255, 0.4);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+      background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+      background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+    .peg.purple:hover {
+      background: #222244;
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, #222245, #222244 80%, #222244 100%);
+      background-image: radial-gradient( circle  at 50% 120%, #222245, #222244 80%, #222244 100%); }
+      .peg.purple:hover:before {
+        background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+        background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+      .peg.purple:hover:after {
+        background-color: rgba(255, 255, 255, 0.4);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+        background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+        background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+  .peg.blue {
+    background: #333399;
+    background-image: -webkit-radial-gradient(50% 120%,  circle cover, #33339a, #333399 80%, #333399 100%);
+    background-image: radial-gradient( circle  at 50% 120%, #33339a, #333399 80%, #333399 100%); }
+    .peg.blue:before {
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+      background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+    .peg.blue:after {
+      background-color: rgba(255, 255, 255, 0.4);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+      background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+      background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+    .peg.blue:hover {
+      background: #262673;
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, #262673, #262673 80%, #262673 100%);
+      background-image: radial-gradient( circle  at 50% 120%, #262673, #262673 80%, #262673 100%); }
+      .peg.blue:hover:before {
+        background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+        background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+      .peg.blue:hover:after {
+        background-color: rgba(255, 255, 255, 0.4);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+        background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+        background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+  .peg.yellow {
+    background: #998822;
+    background-image: -webkit-radial-gradient(50% 120%,  circle cover, #9a8922, #998822 80%, #998822 100%);
+    background-image: radial-gradient( circle  at 50% 120%, #9a8922, #998822 80%, #998822 100%); }
+    .peg.yellow:before {
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+      background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+    .peg.yellow:after {
+      background-color: rgba(255, 255, 255, 0.4);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+      background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+      background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+    .peg.yellow:hover {
+      background: #6f6319;
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, #706319, #6f6319 80%, #6f6319 100%);
+      background-image: radial-gradient( circle  at 50% 120%, #706319, #6f6319 80%, #6f6319 100%); }
+      .peg.yellow:hover:before {
+        background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+        background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+      .peg.yellow:hover:after {
+        background-color: rgba(255, 255, 255, 0.4);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+        background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+        background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+  .peg.orange {
+    background: #883311;
+    background-image: -webkit-radial-gradient(50% 120%,  circle cover, #893311, #883311 80%, #883311 100%);
+    background-image: radial-gradient( circle  at 50% 120%, #893311, #883311 80%, #883311 100%); }
+    .peg.orange:before {
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+      background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+    .peg.orange:after {
+      background-color: rgba(255, 255, 255, 0.4);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+      background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+      background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+    .peg.orange:hover {
+      background: #5b220b;
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, #5b220b, #5b220b 80%, #5b220b 100%);
+      background-image: radial-gradient( circle  at 50% 120%, #5b220b, #5b220b 80%, #5b220b 100%); }
+      .peg.orange:hover:before {
+        background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+        background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+      .peg.orange:hover:after {
+        background-color: rgba(255, 255, 255, 0.4);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+        background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+        background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+  .peg.green {
+    background: #336611;
+    background-image: -webkit-radial-gradient(50% 120%,  circle cover, #336711, #336611 80%, #336611 100%);
+    background-image: radial-gradient( circle  at 50% 120%, #336711, #336611 80%, #336611 100%); }
+    .peg.green:before {
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+      background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+    .peg.green:after {
+      background-color: rgba(255, 255, 255, 0.4);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+      background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+      background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+    .peg.green:hover {
+      background: #1d3a0a;
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, #1d3b0a, #1d3a0a 80%, #1d3a0a 100%);
+      background-image: radial-gradient( circle  at 50% 120%, #1d3b0a, #1d3a0a 80%, #1d3a0a 100%); }
+      .peg.green:hover:before {
+        background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+        background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+      .peg.green:hover:after {
+        background-color: rgba(255, 255, 255, 0.4);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+        background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+        background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+  .peg.white {
+    background: #999999;
+    background-image: -webkit-radial-gradient(50% 120%,  circle cover, #999999, #999999 80%, #999999 100%);
+    background-image: radial-gradient( circle  at 50% 120%, #999999, #999999 80%, #999999 100%); }
+    .peg.white:before {
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+      background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+    .peg.white:after {
+      background-color: rgba(255, 255, 255, 0.4);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+      background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+      background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+    .peg.white:hover {
+      background: gray;
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, gray, gray 80%, gray 100%);
+      background-image: radial-gradient( circle  at 50% 120%, gray, gray 80%, gray 100%); }
+      .peg.white:hover:before {
+        background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+        background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+      .peg.white:hover:after {
+        background-color: rgba(255, 255, 255, 0.4);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+        background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+        background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+  .peg.black {
+    background: #222222;
+    background-image: -webkit-radial-gradient(50% 120%,  circle cover, #222222, #222222 80%, #222222 100%);
+    background-image: radial-gradient( circle  at 50% 120%, #222222, #222222 80%, #222222 100%); }
+    .peg.black:before {
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+      background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+    .peg.black:after {
+      background-color: rgba(255, 255, 255, 0.4);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+      background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+      background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
+    .peg.black:hover {
+      background: #090909;
+      background-image: -webkit-radial-gradient(50% 120%,  circle cover, #090909, #090909 80%, #090909 100%);
+      background-image: radial-gradient( circle  at 50% 120%, #090909, #090909 80%, #090909 100%); }
+      .peg.black:hover:before {
+        background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+        background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
+      .peg.black:hover:after {
+        background-color: rgba(255, 255, 255, 0.4);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+        background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+        background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
