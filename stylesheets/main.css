@@ -41,6 +41,16 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+.decoding-board {
+  border-radius: 5px;
+  margin: 0 auto;
+  width: 14.4em;
+  background-image: -webkit-linear-gradient(left, #3a3a3a 1%, #595959 6%, #666666 51%, #595959 94%, #3a3a3a 100%);
+  background-image: linear-gradient(to right, #3a3a3a 1%, #595959 6%, #666666 51%, #595959 94%, #3a3a3a 100%); }
+  @media only screen and (max-width: 320px) {
+    .decoding-board {
+      width: 100%; } }
+
 .peg {
   /* marble-mixnin */
   display: block;
@@ -271,11 +281,34 @@ table {
     opacity: 0.9;
     cursor: none; }
 
+.pegColors {
+  *zoom: 1;
+  width: 14.4em;
+  padding: 1em;
+  border-radius: 5px;
+  margin: 1em 0 0 0; }
+  .pegColors:before, .pegColors:after {
+    content: " ";
+    display: table; }
+  .pegColors:after {
+    clear: both; }
+  .pegColors .peg {
+    float: left;
+    margin: 0.5em 0.3em; }
+  @media only screen and (max-width: 320px) {
+    .pegColors {
+      padding: 0.5em;
+      width: 4em;
+      margin: 0 1em 0 0; }
+      .pegColors .peg {
+        margin-right: 0em; } }
+
 .guessRows {
-  display: inline-block;
-  padding: 0 1em;
-  background-image: -webkit-linear-gradient(left, #3a3a3a 1%, #595959 6%, #666666 51%, #595959 94%, #3a3a3a 100%);
-  background-image: linear-gradient(to right, #3a3a3a 1%, #595959 6%, #666666 51%, #595959 94%, #3a3a3a 100%); }
+  width: 14.4em;
+  padding: 0 1em; }
+  @media only screen and (max-width: 320px) {
+    .guessRows {
+      float: right; } }
   .guessRows .guess {
     *zoom: 1; }
     .guessRows .guess:before, .guessRows .guess:after {

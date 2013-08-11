@@ -2,7 +2,17 @@
 @import "reset.scss";
 @import "marble";
 @import "hole";
+@import "respond-to";
 
+.decoding-board {
+  border-radius: 5px;
+  margin: 0 auto;
+  width: 14.4em;
+  @include background-image(linear-gradient(to right, rgba(58, 58, 58, 1) 1%, rgba(89, 89, 89, 1) 6%, rgba(102, 102, 102, 1) 51%, rgba(89, 89, 89, 1) 94%, rgba(58, 58, 58, 1) 100%));
+  @include respond-to(handhelds) {
+    width: 100%;
+  }
+}
 
 .peg {
   @include marble();
@@ -41,11 +51,40 @@
 }
 
 
+
+.pegColors {
+  @include clearfix;
+
+  width: 14.4em;
+  padding: 1em;
+  border-radius: 5px;
+  margin: 1em 0 0 0;
+
+  .peg {
+    float: left;
+    margin: 0.5em 0.3em;
+  }
+
+  @include respond-to(handhelds) {
+    padding: 0.5em;
+    width: 4em;
+    margin: 0 1em 0 0;
+    .peg {
+      margin-right: 0em;
+    }
+  }
+}
+
+
+
+
 .guessRows {
-  display:inline-block;
+  width: 14.4em;
   padding: 0 1em;
 
-  @include background-image(linear-gradient(to right, rgba(58, 58, 58, 1) 1%, rgba(89, 89, 89, 1) 6%, rgba(102, 102, 102, 1) 51%, rgba(89, 89, 89, 1) 94%, rgba(58, 58, 58, 1) 100%));
+  @include respond-to(handhelds) {
+    float:right;
+  }
 
   .guess {
     @include clearfix();

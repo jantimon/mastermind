@@ -15,6 +15,7 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/v
         this.current_row = options.current_row || options.guesses.length - 1;
         this.guesses = options.guesses;
         this.colors = options.colors;
+        this.$el.addClass("decoding-board");
 
         // Allow pegs to be dropped into the last row:
         this.guesses[this.current_row].set("active", true);

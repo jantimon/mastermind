@@ -9,7 +9,7 @@ define("bootstrap", ["backbone", "jquery", "router", "underscore", "mastermind/v
 
       // Data structure
       var cols = 4;
-      var rows = 12;
+      var rows = 8;
       var guesses = _.map(_.range(rows), function () {
         var pegSet = new PegSetCollection();
         for (var i = 0; i < cols; i++) {
