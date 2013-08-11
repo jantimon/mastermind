@@ -15,6 +15,7 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/c
       initialize: function (options) {
         this.model = options.model;
         this.cols = options.cols;
+        this.model.on("change", this.render, this);
         this.model.get("pegs").on("change", this.render, this);
       },
 
@@ -32,6 +33,10 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/c
             visible: true,
             color: draggedPegModel.get("color")
           });
+          // This might need a confirmation:
+          if(this.model.isFull()) {
+            this.$el.trigger("guess-complete");
+          }
         }
       },
 
@@ -55,22 +60,12 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/c
 
         // classes
         this.$el.removeClass("full empty active disabled");
-        var empty = !this.model.get("pegs").any(function (peg) {
-          return peg.get("visible");
-        });
-
-        var full = !this.model.get("pegs").any(function (peg) {
-          return !peg.get("visible");
-        });
-
-        if(empty) {
+        if(this.model.isEmpty()) {
           this.$el.addClass("empty");
         }
-
-        if(full) {
+        if(this.model.isFull()) {
           this.$el.addClass("full");
         }
-
         if(this.model.get("active")) {
           this.$el.addClass("active");
         } else {

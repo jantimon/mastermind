@@ -18,10 +18,6 @@ define("bootstrap", ["backbone", "jquery", "router", "underscore", "mastermind/v
         return new GuessModel({pegs: pegSet});
       });
 
-      // Allow pegs to be dropped on the last row:
-      guesses[rows - 1].set("active", true);
-
-
       var colors = new PegSetCollection();
       _.each(PegModel.colors, function (color) {
         colors.add(new PegModel({color: color, visible: true}));

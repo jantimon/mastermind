@@ -52,10 +52,11 @@
   }
 
   .pegContainer {
+    @include hole();
     float: left;
     display:block;
     margin: 0.5em 0.3em;
-    @include hole();
+
     @include size(2.5em 2.5em);
 
     .peg {
@@ -66,5 +67,10 @@
     }
   }
 
+  // Disabled state:
+  .disabled.empty > .pegContainer {
+    @include hole();
+    opacity: 0.4;
+  }
 
 }

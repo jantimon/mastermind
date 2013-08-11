@@ -25,8 +25,7 @@
     border-radius: 50%;
     bottom: -140%;
     right: -10%;
-    opacity: 1;
-    height: 250%;
+    height: 280%;
     width: 180%;
     z-index: 2;
     @include background-image(radial-gradient(circle at 50% 40%, #777, #000 70%));

@@ -284,14 +284,14 @@ table {
     .guessRows .guess:after {
       clear: both; }
   .guessRows .pegContainer {
-    float: left;
-    display: block;
-    margin: 0.5em 0.3em;
     overflow: hidden;
     display: block;
     position: relative;
     border-radius: 50%;
     background: black;
+    float: left;
+    display: block;
+    margin: 0.5em 0.3em;
     width: 2.5em;
     height: 2.5em; }
     .guessRows .pegContainer:before {
@@ -300,8 +300,7 @@ table {
       border-radius: 50%;
       bottom: -140%;
       right: -10%;
-      opacity: 1;
-      height: 250%;
+      height: 280%;
       width: 180%;
       z-index: 2;
       background-image: -webkit-radial-gradient(50% 40%,  circle, #777777, black 70%);
@@ -311,3 +310,21 @@ table {
       left: 0;
       top: 0;
       z-index: 10; }
+  .guessRows .disabled.empty > .pegContainer {
+    overflow: hidden;
+    display: block;
+    position: relative;
+    border-radius: 50%;
+    background: black;
+    opacity: 0.4; }
+    .guessRows .disabled.empty > .pegContainer:before {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      bottom: -140%;
+      right: -10%;
+      height: 280%;
+      width: 180%;
+      z-index: 2;
+      background-image: -webkit-radial-gradient(50% 40%,  circle, #777777, black 70%);
+      background-image: radial-gradient(  circle at 50% 40%, #777777, black 70%); }

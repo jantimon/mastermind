@@ -8,7 +8,20 @@ define(["backbone", "mastermind/collection/pegSet"],
       defaults: {
         pegs: new PegSet(),
         active: false
+      },
+
+      isEmpty: function() {
+        return !this.get("pegs").any(function (peg) {
+          return peg.get("visible");
+        });
+      },
+
+      isFull: function(){
+        return !this.get("pegs").any(function (peg) {
+          return !peg.get("visible");
+        });
       }
+
     });
 
     return Guess;
