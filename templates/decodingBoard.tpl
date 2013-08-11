@@ -4,9 +4,10 @@
     <span class="peg color-<%= peg.get("color") %>"><%= peg.get("color") %></span>
   <% }); %>
 </div>
-<div class="tries">
-  <% _.each(attempts, function(attempt) { %>
-    <div class="attempt"></div>
+<div class="guessRows">
+  <% _.each(_.range(guessCount), function(guess) { %>
+    <div class="guess">
+    </div>
   <% }); %>
 </div>
 <div class="pegs">

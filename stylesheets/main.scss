@@ -5,9 +5,18 @@
 .peg {
   @include marble();
   @include size(5em 5em);
+  cursor: hand;
 
   // Colors .peg.red .. .peg.black
-  $colorList: "red" #600, "purple" #336, "blue" #339, "yellow" #982, "orange" #831, "green" #361, "white" #999, "black" #222222;
+  $colorList: "red" #600,
+              "purple" #631f66,
+              "blue" #339,
+              "yellow" #c0b200,
+              "orange" #9e3f00,
+              "green" #361,
+              "white" #d6d6d6,
+              "black" #222222;
+
   @each $colorSet in $colorList {
     $color: nth($colorSet, 2);
     $name: nth($colorSet, 1);
@@ -18,4 +27,26 @@
       }
     }
   }
+
+  // Drag'n'drop clone:
+  &.ghost {
+    position: absolute;
+    opacity: 0.9;
+  }
+
+}
+
+
+.guessRows {
+
+  .guess {
+  }
+
+  .pegContainer {
+    display:inline-block;
+    border: 1px solid black;
+    @include size(2em 2em);
+  }
+
+
 }

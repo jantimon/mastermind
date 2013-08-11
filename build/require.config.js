@@ -16,6 +16,9 @@ requirejs.config({
     "jquery": "components/jquery/jquery-2.0.3.min",
     "backbone": "components/backbone/backbone-min",
     "underscore": "components/underscore/underscore",
+    "hammer": "components/hammerjs/dist/hammer",
+    "hammer-jquery": "components/hammerjs/plugins/jquery.hammer",
+    "mastermind": "src",
     // Modernizr
     "Modernizr": "components/modernizr/src/Modernizr",
     "addTest": "components/modernizr/src/addTest",

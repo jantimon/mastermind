@@ -7,15 +7,17 @@ define("bootstrap", ["backbone", "jquery", "router", "underscore", "mastermind/v
 
     router().on("route:game", function () {
 
-
-
-      }, 500);
-
-
-      var view = new MastermindView({
-        parent: document.body
+      var pegSets = _.map(_.range(8), function(){
+        return new PegSetCollection();
       });
 
+      var view = new MastermindView({
+        pegSets: pegSets
+      });
+      view.$el.appendTo(document.body);
+      view.render();
+
+      }, 500);
     Backbone.history.start();
 
   });
