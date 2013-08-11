@@ -7,7 +7,8 @@ define(["backbone"],
 
     var Peg = Backbone.Model.extend({
       defaults: {
-        color: colors[0]
+        color: colors[0],
+        visible: true
       }
     });
 

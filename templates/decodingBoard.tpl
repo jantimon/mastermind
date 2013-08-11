@@ -10,7 +10,7 @@
     </div>
   <% }); %>
 </div>
-<div class="pegs">
+<div class="pegColors">
   <% _.each(pegColors, function(color) { %>
     <span class="peg <%= color %>"><%= color %></span>
   <% }); %>

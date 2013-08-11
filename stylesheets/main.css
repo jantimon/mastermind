@@ -43,18 +43,18 @@ table {
 
 .peg {
   /* marble-mixnin */
-  display: inline-block;
+  display: block;
   position: relative;
   border-radius: 50%;
-  box-shadow: 1px 2px 1px rgba(25, 25, 25, 0.25);
   overflow: hidden;
   color: transparent;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  width: 5em;
-  height: 5em;
+  width: 2.5em;
+  height: 2.5em;
+  z-index: 5;
   cursor: hand; }
   .peg:before {
     content: "";
@@ -268,10 +268,46 @@ table {
         background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
   .peg.ghost {
     position: absolute;
-    opacity: 0.9; }
+    opacity: 0.9;
+    cursor: none; }
 
-.guessRows .pegContainer {
+.guessRows {
   display: inline-block;
-  border: 1px solid black;
-  width: 2em;
-  height: 2em; }
+  padding: 0 1em;
+  background-image: -webkit-linear-gradient(left, #3a3a3a 1%, #595959 6%, #666666 51%, #595959 94%, #3a3a3a 100%);
+  background-image: linear-gradient(to right, #3a3a3a 1%, #595959 6%, #666666 51%, #595959 94%, #3a3a3a 100%); }
+  .guessRows .guess {
+    *zoom: 1; }
+    .guessRows .guess:before, .guessRows .guess:after {
+      content: " ";
+      display: table; }
+    .guessRows .guess:after {
+      clear: both; }
+  .guessRows .pegContainer {
+    float: left;
+    display: block;
+    margin: 0.5em 0.3em;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    border-radius: 50%;
+    background: black;
+    width: 2.5em;
+    height: 2.5em; }
+    .guessRows .pegContainer:before {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      bottom: -140%;
+      right: -10%;
+      opacity: 1;
+      height: 250%;
+      width: 180%;
+      z-index: 2;
+      background-image: -webkit-radial-gradient(50% 40%,  circle, #777777, black 70%);
+      background-image: radial-gradient(  circle at 50% 40%, #777777, black 70%); }
+    .guessRows .pegContainer .peg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 10; }

@@ -1,7 +1,7 @@
 /* global define:false */
 
-define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/view/guess", "mastermind/model/peg", "tpl!templates/decodingBoard.tpl"],
-  function (Backbone, _, $, PegView, GuessView, PegModel, template) {
+define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/view/guessRow", "mastermind/model/peg", "tpl!templates/decodingBoard.tpl"],
+  function (Backbone, _, $, PegView, GuessRowView, PegModel, template) {
     "use strict";
 
     return Backbone.View.extend({
@@ -14,7 +14,8 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/v
       cols: 4,
 
       initialize: function (options) {
-        this.pegSets = options.pegSets;
+        this.guesses = options.guesses;
+        this.colors = options.colors;
       },
 
       /**
@@ -22,24 +23,24 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/v
        */
       render: function () {
         this.$el.html(template({
-          pegColors: PegModel.colors,
+          pegColors: this.colors,
           solution: this.solution,
-          guessCount: this.pegSets.length
+          guessCount: this.guesses.length
         }));
 
         var guesses = _.map(this.$(".guess"), _.bind(function(guess, i){
-          var guessView = new GuessView({ collection: this.pegSets[i], cols: this.cols });
+          var guessView = new GuessRowView({ model: this.guesses[i], cols: this.cols });
           guessView.setElement(guess);
           guessView.render();
           return guessView;
         }, this));
 
-        var pegs = _.map(this.$(".peg"), function(peg){
-          var pegView = new PegView({color : $(peg).text()});
+        var pegs = _.map(this.$(".pegColors .peg"), _.bind(function(peg,i){
+          var pegView = new PegView({model : this.colors.at(i)});
           pegView.setElement(peg);
           pegView.render();
           return peg;
-        });
+        }, this));
 
       }
 

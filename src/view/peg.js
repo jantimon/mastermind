@@ -24,12 +24,22 @@ define(["backbone", "underscore", "jquery", "mastermind/model/peg", "hammer-jque
       },
 
       initialize: function (options) {
-        this.color = options.color;
-        this.$el.addClass("peg");
+        if(!options.model) {
+          throw (new Error("can't initialize peg without model"));
+        }
+        this.model = options.model;
+        this.model.on("change", this.render, this);
       },
 
       render: function () {
         this.$el.hammer();
+        if(this.model.get("visible")) {
+          this.$el.show();
+          this.$el.attr("class", "peg " + this.model.get("color"));
+        } else {
+          this.$el.hide();
+        }
+
       },
 
       /**
@@ -37,11 +47,13 @@ define(["backbone", "underscore", "jquery", "mastermind/model/peg", "hammer-jque
        * @param ev
        */
       dragStart: function (ev) {
-        this.$ghost = this.$el
-          .clone()
-          .addClass("ghost")
-          .appendTo(document.body);
-        this.dragging(ev);
+        if (ev.gesture) {
+          this.$ghost = this.$el
+            .clone()
+            .addClass("ghost")
+            .appendTo(document.body);
+          this.dragging(ev);
+        }
       },
 
       /**
@@ -49,11 +61,13 @@ define(["backbone", "underscore", "jquery", "mastermind/model/peg", "hammer-jque
        * @param ev
        */
       dragEnd: function (ev) {
-        ev.gesture.preventDefault();
-        this.$ghost.remove();
-        var position = getFirstTouchPosition(ev.gesture),
-          dropTarget = document.elementFromPoint(position.clientX, position.clientY);
-        $(dropTarget).trigger("drop", this);
+        if(ev.gesture) {
+          ev.gesture.preventDefault();
+          this.$ghost.remove();
+          var position = getFirstTouchPosition(ev.gesture),
+            dropTarget = document.elementFromPoint(position.clientX, position.clientY);
+          $(dropTarget).trigger("drop", this);
+        }
       },
 
       /**
