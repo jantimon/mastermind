@@ -1,7 +1,7 @@
 /* global define:false */
 
-define(["backbone", "underscore", "jquery", "mastermind/model/peg", "hammer-jquery"],
-  function (Backbone, _, $, PegModel) {
+define(["backbone", "underscore", "jquery", "hammer-jquery"],
+  function (Backbone, _, $) {
     "use strict";
 
     function getFirstTouchPosition(gesture) {
@@ -11,7 +11,7 @@ define(["backbone", "underscore", "jquery", "mastermind/model/peg", "hammer-jque
       return {pageX: 0, pageY: 0, clientX: 0, clientY: 0};
     }
 
-    var PegView = Backbone.View.extend({
+    return Backbone.View.extend({
 
       el: "<span/>",
       $ghost: null,
@@ -84,8 +84,6 @@ define(["backbone", "underscore", "jquery", "mastermind/model/peg", "hammer-jque
       }
 
     });
-
-    return PegView;
 
   });
 

@@ -36,11 +36,8 @@
   }
   &:after {
     content: "";
-    width: 70%;
-    height: 50%;
-    position: absolute;
-    top: 5%;
-    left: 15%;
+    @include position(absolute, 5% 15% 0 15%);
+    @include size(70% 50%);
     border-radius: 50%;
   }
 }

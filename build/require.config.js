@@ -13,7 +13,7 @@ requirejs.config({
   },
   // Path definitions
   paths: {
-    "jquery": "components/jquery/jquery-2.0.3.min",
+    "jquery": "components/jquery/jquery-1.10.2.min",
     "backbone": "components/backbone/backbone-min",
     "underscore": "components/underscore/underscore",
     "hammer": "components/hammerjs/dist/hammer",

@@ -3,7 +3,7 @@
 define(["backbone"],
   function (Backbone) {
     "use strict";
-    var colors = ['black', 'red', 'purple', 'blue', 'yellow', 'orange', 'green', 'white'];
+    var colors = ['red', 'purple', 'blue', 'orange', 'green'];
 
     var Peg = Backbone.Model.extend({
       defaults: {

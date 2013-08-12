@@ -18,6 +18,13 @@ define("bootstrap", ["backbone", "jquery", "router", "underscore", "mastermind/v
         return new GuessModel({pegs: pegSet});
       });
 
+      // Secret combination
+      var secretCombination = new PegSetCollection();
+      _.each(_.range(cols), function(i){
+        var random = Math.floor(Math.random() * PegModel.colors.length);
+        secretCombination.add(new PegModel({color: PegModel.colors[random]}));
+      });
+
       var colors = new PegSetCollection();
       _.each(PegModel.colors, function (color) {
         colors.add(new PegModel({color: color, visible: true}));
@@ -25,6 +32,7 @@ define("bootstrap", ["backbone", "jquery", "router", "underscore", "mastermind/v
 
       // View
       var view = new MastermindView({
+        secretCombination: secretCombination,
         guesses: guesses,
         colors: colors
       });

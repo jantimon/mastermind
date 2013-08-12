@@ -42,14 +42,27 @@ table {
   border-spacing: 0; }
 
 .decoding-board {
+  *zoom: 1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   border-radius: 5px;
   margin: 0 auto;
-  width: 14.4em;
+  width: 18.4em;
   background-image: -webkit-linear-gradient(left, #3a3a3a 1%, #595959 6%, #666666 51%, #595959 94%, #3a3a3a 100%);
   background-image: linear-gradient(to right, #3a3a3a 1%, #595959 6%, #666666 51%, #595959 94%, #3a3a3a 100%); }
+  .decoding-board:before, .decoding-board:after {
+    content: " ";
+    display: table; }
+  .decoding-board:after {
+    clear: both; }
   @media only screen and (max-width: 320px) {
     .decoding-board {
       width: 100%; } }
+  @media only screen and (max-width: 320px) {
+    .decoding-board {
+      font-size: 0.7em; } }
 
 .peg {
   /* marble-mixnin */
@@ -78,11 +91,12 @@ table {
     z-index: 2; }
   .peg:after {
     content: "";
-    width: 70%;
-    height: 50%;
     position: absolute;
     top: 5%;
+    right: 15%;
     left: 15%;
+    width: 70%;
+    height: 50%;
     border-radius: 50%; }
   .peg.red {
     background: #660000;
@@ -152,30 +166,6 @@ table {
         background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
         background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
       .peg.blue:hover:after {
-        background-color: rgba(255, 255, 255, 0.4);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
-        background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
-        background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
-  .peg.yellow {
-    background: #c0b200;
-    background-image: -webkit-radial-gradient(50% 120%,  circle cover, #c1b300, #c0b200 80%, #c0b200 100%);
-    background-image: radial-gradient( circle  at 50% 120%, #c1b300, #c0b200 80%, #c0b200 100%); }
-    .peg.yellow:before {
-      background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
-      background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
-    .peg.yellow:after {
-      background-color: rgba(255, 255, 255, 0.4);
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
-      background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
-      background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
-    .peg.yellow:hover {
-      background: #8d8300;
-      background-image: -webkit-radial-gradient(50% 120%,  circle cover, #8e8300, #8d8300 80%, #8d8300 100%);
-      background-image: radial-gradient( circle  at 50% 120%, #8e8300, #8d8300 80%, #8d8300 100%); }
-      .peg.yellow:hover:before {
-        background-image: -webkit-radial-gradient(50% 120%,  circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
-        background-image: radial-gradient( circle  at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%); }
-      .peg.yellow:hover:after {
         background-color: rgba(255, 255, 255, 0.4);
         background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
         background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
@@ -278,39 +268,58 @@ table {
         background-image: linear-gradient(to bottom,rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); }
   .peg.ghost {
     position: absolute;
-    opacity: 0.9;
     cursor: none; }
 
-.pegColors {
+.pegColors, .solution {
   *zoom: 1;
-  width: 14.4em;
-  padding: 1em;
-  border-radius: 5px;
-  margin: 1em 0 0 0; }
-  .pegColors:before, .pegColors:after {
+  border-top: 3px groove #333;
+  border-color: rgba(10, 10, 10, 0.3);
+  padding: 0 1em;
+  clear: both;
+  width: 100%;
+  border-radius: 0.8em; }
+  .pegColors:before, .solution:before, .pegColors:after, .solution:after {
     content: " ";
     display: table; }
-  .pegColors:after {
+  .pegColors:after, .solution:after {
     clear: both; }
-  .pegColors .peg {
-    float: left;
-    margin: 0.5em 0.3em; }
+  .pegColors .peg, .solution .peg {
+    display: inline-block;
+    margin: 0.5em 0.2em; }
+
+@media only screen and (max-width: 320px) {
+  .pegColors {
+    border-width: 0;
+    clear: none;
+    padding: 0.5em;
+    width: 4em;
+    margin: 0 1em 0 0; }
+    .pegColors .peg {
+      margin-right: 0em; } }
+
+.solution {
+  height: 3.5em; }
   @media only screen and (max-width: 320px) {
-    .pegColors {
-      padding: 0.5em;
-      width: 4em;
-      margin: 0 1em 0 0; }
-      .pegColors .peg {
-        margin-right: 0em; } }
+    .solution {
+      padding-right: 5em;
+      text-align: right; } }
 
 .guessRows {
+  *zoom: 1;
   width: 14.4em;
+  float: left;
   padding: 0 1em; }
+  .guessRows:before, .guessRows:after {
+    content: " ";
+    display: table; }
+  .guessRows:after {
+    clear: both; }
   @media only screen and (max-width: 320px) {
     .guessRows {
       float: right; } }
   .guessRows .guess {
-    *zoom: 1; }
+    *zoom: 1;
+    height: 3.5em; }
     .guessRows .guess:before, .guessRows .guess:after {
       content: " ";
       display: table; }
@@ -344,13 +353,31 @@ table {
       top: 0;
       z-index: 10; }
   .guessRows .disabled.empty > .pegContainer {
+    opacity: 0.4; }
+
+.hintRows {
+  float: right;
+  margin: 0.5em 1em 0 0;
+  width: 3em; }
+  .hintRows .hint {
+    height: 3.5em;
+    width: 100%; }
+  .hintRows .peg {
+    float: left;
+    width: 1em;
+    height: 1em;
+    margin: 0.1em; }
+  .hintRows .mismatch {
     overflow: hidden;
     display: block;
     position: relative;
     border-radius: 50%;
     background: black;
-    opacity: 0.4; }
-    .guessRows .disabled.empty > .pegContainer:before {
+    opacity: 0.4;
+    margin: 0.2em;
+    width: 0.8em;
+    height: 0.8em; }
+    .hintRows .mismatch:before {
       content: "";
       position: absolute;
       border-radius: 50%;

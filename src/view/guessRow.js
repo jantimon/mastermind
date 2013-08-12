@@ -4,7 +4,7 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/c
   function (Backbone, _, $, PegView, PegSet, template) {
     "use strict";
 
-    var GuessView = Backbone.View.extend({
+    return Backbone.View.extend({
 
       el: "<div/>",
 
@@ -13,7 +13,7 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/c
       },
 
       initialize: function (options) {
-        this.model = options.model;
+        this.model = options.guess;
         this.cols = options.cols;
         this.model.on("change", this.render, this);
         this.model.get("pegs").on("change", this.render, this);
@@ -25,7 +25,7 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/c
        * @param draggedPegView
        */
       drop: function (event, draggedPegView) {
-        if (draggedPegView instanceof PegView && this.model.get("active")) {
+        if (draggedPegView instanceof PegView && this.model.get("enabled")) {
           var index = this.$(".pegContainer").index(event.currentTarget);
           var draggedPegModel = draggedPegView.model;
           this.model.get("pegs").at(index).set({
@@ -34,7 +34,8 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/c
             color: draggedPegModel.get("color")
           });
           // This might need a confirmation:
-          if(this.model.isFull()) {
+          if (this.model.isFull()) {
+            this.model.set("enabled", false);
             this.$el.trigger("guess-complete");
           }
         }
@@ -45,7 +46,7 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/c
        */
       render: function () {
         // Render pegs
-        if(this.$el.children().length === 0 ) {
+        if (this.$el.children().length === 0) {
 
           this.$el.html(template({
             pegContainers: this.model.get("pegs")
@@ -59,25 +60,13 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/c
         }
 
         // classes
-        this.$el.removeClass("full empty active disabled");
-        if(this.model.isEmpty()) {
-          this.$el.addClass("empty");
-        }
-        if(this.model.isFull()) {
-          this.$el.addClass("full");
-        }
-        if(this.model.get("active")) {
-          this.$el.addClass("active");
-        } else {
-          this.$el.addClass("disabled");
-        }
-
+        this.$el.toggleClass("empty", this.model.isEmpty());
+        this.$el.toggleClass("full", this.model.isFull());
+        this.$el.toggleClass("enabled", this.model.get("enabled"));
+        this.$el.toggleClass("disabled", !this.model.get("enabled"));
       }
 
     });
-
-    return GuessView;
-
   });
 
 

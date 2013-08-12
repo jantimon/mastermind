@@ -4,10 +4,10 @@ define(["backbone", "mastermind/collection/pegSet"],
   function (Backbone, PegSet) {
     "use strict";
 
-    var Guess = Backbone.Model.extend({
+    return Backbone.Model.extend({
       defaults: {
         pegs: new PegSet(),
-        active: false
+        enabled: false
       },
 
       isEmpty: function() {
@@ -23,8 +23,6 @@ define(["backbone", "mastermind/collection/pegSet"],
       }
 
     });
-
-    return Guess;
   });
 
 
