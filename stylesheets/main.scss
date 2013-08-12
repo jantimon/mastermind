@@ -1,0 +1,167 @@
+@import "bourbon/bourbon";
+@import "reset.scss";
+@import "marble";
+@import "hole";
+@import "respond-to";
+
+$guess-row-height: 3.5em;
+
+
+.decoding-board {
+  @include clearfix;
+  @include user-select(none);
+  border-radius: 5px;
+  margin: 0 auto;
+  width: 18.4em;
+  @include background-image(linear-gradient(to right, rgba(58, 58, 58, 1) 1%, rgba(89, 89, 89, 1) 6%, rgba(102, 102, 102, 1) 51%, rgba(89, 89, 89, 1) 94%, rgba(58, 58, 58, 1) 100%));
+  @include respond-to(handhelds) {
+    width: 100%;
+  }
+
+  @include respond-to(handhelds) {
+    font-size: 0.7em;
+  }
+}
+
+.peg {
+  @include marble();
+  @include size(2.5em 2.5em);
+  z-index: 5;
+  cursor: hand;
+
+  // Colors .peg.red .. .peg.black
+  $colorList: "red" #600,
+              "purple" #631f66,
+              "blue" #339,
+              "orange" #9e3f00,
+              "green" #361,
+              "white" #d6d6d6,
+              "black" #222222;
+
+  @each $colorSet in $colorList {
+    $color: nth($colorSet, 2);
+    $name: nth($colorSet, 1);
+    &.#{$name} {
+      @include marble-color($color);
+      &:hover {
+        @include marble-color(darken($color, 10));
+      }
+    }
+  }
+
+  // Drag'n'drop clone:
+  &.ghost {
+    position: absolute;
+    //opacity: 0.9;
+    cursor: none;
+  }
+
+}
+
+// A simple container full of pegs
+%pegSet {
+  @include clearfix;
+  border-top: 3px groove #333;
+  border-color: rgba(10, 10, 10, 0.3);
+  padding: 0 1em;
+  clear: both;
+  width: 100%;
+  border-radius: 0.8em;
+
+  .peg {
+    display: inline-block;
+    margin: 0.5em 0.2em;
+  }
+}
+
+// The peg picker
+.pegColors {
+  @extend %pegSet;
+
+  @include respond-to(handhelds) {
+    border-width: 0;
+    clear: none;
+    padding: 0.5em;
+    width: 4em;
+    margin: 0 1em 0 0;
+    .peg {
+      margin-right: 0em;
+    }
+  }
+}
+
+// The hidden solution
+.solution {
+  @extend %pegSet;
+  height: 3.5em;
+  @include respond-to(handhelds) {
+    padding-right: 5em;
+    text-align: right;
+  }
+}
+
+
+
+
+.guessRows {
+  @include clearfix;
+  width: 14.4em;
+  float: left;
+  padding: 0 1em;
+
+  @include respond-to(handhelds) {
+    float:right;
+  }
+
+  .guess {
+    @include clearfix();
+    height: $guess-row-height;
+  }
+
+  .pegContainer {
+    @include hole();
+    float: left;
+    display:block;
+    margin: 0.5em 0.3em;
+
+    @include size(2.5em 2.5em);
+
+    .peg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 10;
+    }
+  }
+
+  // Disabled state:
+  .disabled.empty > .pegContainer {
+    opacity: 0.4;
+  }
+
+}
+
+
+.hintRows {
+  float: right;
+  margin: 0.5em 1em 0 0;
+  width: 3em;
+
+  .hint {
+    height: $guess-row-height;
+    width: 100%;
+  }
+
+  .peg {
+    float:left;
+    @include size(1em 1em);
+    margin: 0.1em;
+  }
+
+  .mismatch {
+    @include hole();
+    opacity: 0.4;
+    margin: 0.2em;
+    @include size(0.8em);
+  }
+}

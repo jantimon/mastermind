@@ -1,0 +1,50 @@
+/* global define: false, require: false */
+
+// Define App
+define("bootstrap", ["backbone", "jquery", "router", "underscore", "mastermind/view/decodingBoard", "mastermind/model/peg", "mastermind/model/guess", "mastermind/collection/pegSet"],
+  function (Backbone, $, router, _, MastermindView, PegModel, GuessModel, PegSetCollection) {
+    "use strict";
+
+    router().on("route:game", function () {
+
+      // Data structure
+      var cols = 4;
+      var rows = 8;
+      var guesses = _.map(_.range(rows), function () {
+        var pegSet = new PegSetCollection();
+        for (var i = 0; i < cols; i++) {
+          pegSet.add(new PegModel({visible: false}));
+        }
+        return new GuessModel({pegs: pegSet});
+      });
+
+      // Secret combination
+      var secretCombination = new PegSetCollection();
+      _.each(_.range(cols), function(i){
+        var random = Math.floor(Math.random() * PegModel.colors.length);
+        secretCombination.add(new PegModel({color: PegModel.colors[random]}));
+      });
+
+      var colors = new PegSetCollection();
+      _.each(PegModel.colors, function (color) {
+        colors.add(new PegModel({color: color, visible: true}));
+      });
+
+      // View
+      var view = new MastermindView({
+        secretCombination: secretCombination,
+        guesses: guesses,
+        colors: colors
+      });
+      view.$el.appendTo(document.body);
+      view.render();
+
+    }, 500);
+
+    // Start router
+    Backbone.history.start();
+
+  });
+
+// Launch app
+require(["bootstrap"]);

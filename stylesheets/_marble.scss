@@ -1,0 +1,58 @@
+@import "bourbon/bourbon";
+
+//
+// Turns an element into a marble.
+// Uses :after and :before selector.
+//
+// Usage:
+// .marble {
+//   height: 20px;
+//   width: 20px;
+//   @include marble()
+//   @include marble-color(#339);
+// }
+//
+@mixin marble() {
+  /* marble-mixnin */
+  display: block;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  // Hide text
+  color: transparent;
+  // Disable selection
+  @include user-select(none);
+
+  &:before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    bottom: 2.5%;
+    left: 5%;
+    opacity: 0.6;
+    height: 100%;
+    width: 90%;
+    z-index: 2;
+  }
+  &:after {
+    content: "";
+    @include position(absolute, 5% 15% 0 15%);
+    @include size(70% 50%);
+    border-radius: 50%;
+  }
+}
+
+//
+// @see marble();
+//
+@mixin marble-color($color) {
+  background: $color;
+  @include background-image(radial-gradient(50% 120%, circle cover, lighten($color, 0.15), lighten($color, 0.03) 80%, $color 100%));
+
+  &:before {
+    @include background-image(radial-gradient(50% 120%, circle cover, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%));
+  }
+  &:after {
+    @include linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+  }
+}
