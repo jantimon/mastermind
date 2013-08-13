@@ -10,8 +10,9 @@ $guess-row-height: 3.5em;
 .decoding-board {
   @include clearfix;
   @include user-select(none);
-  border-radius: 5px;
-  margin: 0 auto;
+  border-radius: 0.8em 0.8em 0 0;
+  padding-top: 0.5em;
+  margin: 1em auto 0;
   width: 18.4em;
   background-color: #3A3A3A;
   @include background-image(linear-gradient(to right, rgba(58, 58, 58, 1) 1%, rgba(89, 89, 89, 1) 6%, rgba(102, 102, 102, 1) 51%, rgba(89, 89, 89, 1) 94%, rgba(58, 58, 58, 1) 100%));
@@ -21,6 +22,22 @@ $guess-row-height: 3.5em;
 
   @include respond-to(handhelds) {
     font-size: 0.7em;
+    border-radius: 0;
+    margin-top: 0;
+  }
+
+  @include respond-to(wide-screens, medium-screens) {
+    position:relative;
+    padding-bottom: 0.5em;
+    &:after{
+      @include position(absolute, 0 0 0em 0px);
+      @include size(100% 0.5em);
+      display: block;
+      background: #333;
+      border-radius: 0.8em 0.8em 0 0;
+      border: 3px rgba(10, 10, 10, 0.3) groove;
+      border-bottom-width: 0px;
+    }
   }
 }
 
@@ -96,7 +113,22 @@ $guess-row-height: 3.5em;
 // after the game is over
 .solution {
   @extend %pegSet;
+  position: relative;
   height: 3.5em;
+  &:after {
+    content: "";
+    display: block;
+    @include position(absolute, 0px 0px 0 0px);
+    @include size(auto 2.5em);
+    margin: 0.4em 1em;
+    opacity: 0.4;
+    border-radius: 2px;
+    @include background-image(linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(219, 219, 219, 1) 50%, rgba(209, 209, 209, 1) 51%, rgba(254, 254, 254, 1) 100%));
+  }
+  &.revealed:after{
+    display: none;
+  }
+
   @include respond-to(handhelds) {
     padding-right: 5em;
     text-align: right;
