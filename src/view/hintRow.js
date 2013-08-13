@@ -26,7 +26,13 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/c
             return hint || "mismatch";
           });
 
-          this.$el.html(template({hints: hints}));
+          var hintText = {
+            'black': 'correct guess in both color and position',
+            'white': 'correct color guess',
+            'mismatch' : 'wrong color and position'
+          };
+
+          this.$el.html(template({hints: hints, hintText: hintText}));
         } else {
           this.$el.empty();
         }

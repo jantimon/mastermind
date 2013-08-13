@@ -50,6 +50,7 @@ table {
   border-radius: 5px;
   margin: 0 auto;
   width: 18.4em;
+  background-color: #3A3A3A;
   background-image: -webkit-linear-gradient(left, #3a3a3a 1%, #595959 6%, #666666 51%, #595959 94%, #3a3a3a 100%);
   background-image: linear-gradient(to right, #3a3a3a 1%, #595959 6%, #666666 51%, #595959 94%, #3a3a3a 100%); }
   .decoding-board:before, .decoding-board:after {
@@ -71,6 +72,7 @@ table {
   border-radius: 50%;
   overflow: hidden;
   color: transparent;
+  text-indent: 100em;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -78,7 +80,7 @@ table {
   width: 2.5em;
   height: 2.5em;
   z-index: 5;
-  cursor: hand; }
+  cursor: pointer; }
   .peg:before {
     content: "";
     position: absolute;
@@ -330,7 +332,9 @@ table {
     display: block;
     position: relative;
     border-radius: 50%;
-    background: black;
+    background: #777777;
+    color: transparent;
+    text-indent: 100em;
     float: left;
     display: block;
     margin: 0.5em 0.3em;
@@ -366,25 +370,11 @@ table {
     float: left;
     width: 1em;
     height: 1em;
-    margin: 0.1em; }
+    margin: 0.1em;
+    cursor: default; }
   .hintRows .mismatch {
-    overflow: hidden;
-    display: block;
-    position: relative;
-    border-radius: 50%;
-    background: black;
-    opacity: 0.4;
+    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.8);
     margin: 0.2em;
     width: 0.8em;
     height: 0.8em; }
-    .hintRows .mismatch:before {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      bottom: -140%;
-      right: -10%;
-      height: 280%;
-      width: 180%;
-      z-index: 2;
-      background-image: -webkit-radial-gradient(50% 40%,  circle, #777777, black 70%);
-      background-image: radial-gradient(  circle at 50% 40%, #777777, black 70%); }

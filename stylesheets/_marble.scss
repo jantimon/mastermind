@@ -20,6 +20,7 @@
   overflow: hidden;
   // Hide text
   color: transparent;
+  text-indent: 100em;
   // Disable selection
   @include user-select(none);
 
