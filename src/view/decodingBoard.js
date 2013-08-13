@@ -8,18 +8,11 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/v
 
       el: "<div/>",
       canvas: null,
-      solution: [],
-      gameOver: false,
 
       initialize: function (options) {
-        this.current_row = options.current_row || options.guesses.length - 1;
-        this.guesses = options.guesses;
-        this.colors = options.colors;
-        this.secretCombination = options.secretCombination;
+        this.level = options.level;
         this.$el.addClass("decoding-board");
-
-        // Allow pegs to be dropped into the last row:
-        this.guesses[this.current_row].set("enabled", true);
+        this.level.on("change", this.render, this);
       },
 
       events: {
@@ -27,16 +20,18 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/v
       },
 
       guessComplete: function () {
-        if(this.guesses[this.current_row].get("pegs").isPerfectMatch(this.secretCombination)) {
-          this.gameOver = true;
-          this.render();
+        var currentRow = this.level.get("currentRow");
+        var guesses = this.level.get("guesses");
+
+        if (guesses[currentRow].get("pegs").isPerfectMatch(this.level.get("secretCombination"))) {
+          this.level.set("gameOver", true);
         } else {
-          this.current_row--;
-          if (this.guesses[this.current_row]) {
-            this.guesses[this.current_row].set("enabled", true);
+          currentRow--;
+          this.level.set("currentRow", currentRow);
+          if (guesses[currentRow]) {
+            guesses[currentRow].set("enabled", true);
           } else {
-            this.gameOver = true;
-            this.render();
+            this.level.set("gameOver", true);
           }
         }
       },
@@ -45,38 +40,42 @@ define(["backbone", "underscore", "jquery", "mastermind/view/peg", "mastermind/v
        * Renders the template html
        */
       render: function () {
-        if (this.gameOver) {
-          this.solution = this.secretCombination.models;
-        } else {
-          this.solution = [];
+        var solution = [];
+        if (this.level.get("gameOver")) {
+          solution = this.level.get("secretCombination").models;
         }
 
         this.$el.html(template({
-          pegColors: this.colors,
-          solution: this.solution,
-          guessCount: this.guesses.length
+          pegColors: this.level.get("colors"),
+          solution: solution,
+          guessCount: this.level.get("guesses").length
         }));
 
+        var colors = this.level.get("colors");
+        var guesses = this.level.get("guesses");
+
         _.map(this.$(".guess"), _.bind(function (guess, i) {
-          var guessView = new GuessRowView({ guess: this.guesses[i], cols: this.cols });
+          var guessView = new GuessRowView({ guess: guesses[i], cols: this.level.get("cols") });
           guessView.setElement(guess);
           guessView.render();
           return guessView;
         }, this));
 
         _.map(this.$(".hint"), _.bind(function (hint, i) {
-          var hintView = new HintRowView({ guess: this.guesses[i], cols: this.cols, secretCombination: this.secretCombination });
+          var hintView = new HintRowView({ guess: guesses[i], cols: this.level.get("cols"), secretCombination: this.level.get("secretCombination") });
           hintView.setElement(hint);
           hintView.render();
           return hintView;
         }, this));
 
         _.map(this.$(".pegColors .peg"), _.bind(function (peg, i) {
-          var pegView = new PegView({model: this.colors.at(i)});
+          var pegView = new PegView({model: colors.at(i)});
           pegView.setElement(peg);
           pegView.render();
           return peg;
         }, this));
+
+        this.$(".solution").toggleClass('revealed', this.level.get("gameOver"));
 
       }
 

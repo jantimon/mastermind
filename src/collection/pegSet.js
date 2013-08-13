@@ -35,7 +35,8 @@ define(["backbone", "underscore", "mastermind/model/peg"],
         // Get correct positions
         _.each(_.range(pegSet.length), function (peg, i) {
           var color = pegSet.at(i).get("color");
-          if (anotherPegSet.at(i).get("color") === color) {
+          var counterPeg = anotherPegSet.at(i);
+          if (counterPeg && counterPeg.get("color") === color) {
             hints.push("black");
             pegColors[color]--;
             secretColors[color]--;
