@@ -1,8 +1,8 @@
 /* global define:false */
 
-define(["backbone"],
+define(['backbone'],
   function (Backbone) {
-    "use strict";
+    'use strict';
     var colors = ['red', 'purple', 'blue', 'orange', 'green'];
 
     var Peg = Backbone.Model.extend({

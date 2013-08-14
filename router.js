@@ -1,12 +1,12 @@
 /* global define:false */
 
-define("router", ["backbone"], function (Backbone) {
-  "use strict";
+define('router', ['backbone'], function (Backbone) {
+  'use strict';
 
   var AppRouter = Backbone.Router.extend({
     routes: {
-      '/': 'game',
-      '*actions': 'game'
+      'level/:level': 'game',
+      '*actions' : 'default'
     }
   });
 
