@@ -35,7 +35,6 @@ define(['backbone', 'underscore', 'jquery', 'mastermind/view/peg', 'mastermind/c
           });
           // This might need a confirmation:
           if (this.model.isFull()) {
-            this.model.set('enabled', false);
             this.$el.trigger('guess-complete');
           }
         }

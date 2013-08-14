@@ -52,16 +52,16 @@ define('bootstrap', [
       // Game over event:
       levelModel.on('change:gameOver', function (change) {
         if (levelModel.get('gameOver')) {
-          setTimeout(function () {
+          setTimeout(_.bind(function () {
             if(levelModel.isWon()) {
               // Go to the next level!!
-              router().navigate('level/' + (level + 1), {trigger: true});
+              router().navigate('level/' + (parseInt(level, 10) + 1), {trigger: true});
             } else {
               // Try this level again
               levelModel.reset();
               levelModel.generateSecretCombination();
             }
-          }, 3500);
+          }, this), 3500);
         }
       });
 

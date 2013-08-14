@@ -49,7 +49,7 @@ define(['backbone',
         this.initializeGuessRows();
         // Enable last row
         this.set('currentRow', this.get('rows') - 1);
-        this.get('guessRows')[this.get('rows') - 1].set('enabled', true);
+        this.getCurrentGuessRow().set('enabled', true);
         // Generate new combination
         this.generateSecretCombination();
       },
@@ -97,11 +97,20 @@ define(['backbone',
       },
 
       /**
+       * Returns the current active row
+       *
+       * @returns GuessModel
+       */
+      getCurrentGuessRow: function () {
+        return this.get('guessRows')[this.get('currentRow')];
+      },
+
+      /**
        * Returns true if the level was solved correctly
        * @returns boolean
        */
       isWon: function () {
-        return this.get('gameOver') && this.get('guessRows')[this.get('currentRow')].isPerfectMatch(this.get('secretCombination'));
+        return this.get('gameOver') && this.getCurrentGuessRow().get('pegs').isPerfectMatch(this.get('secretCombination'));
       }
 
     });
