@@ -1,8 +1,8 @@
 /* global define:false */
 
-define(["backbone", "underscore", "jquery", "hammer-jquery"],
+define(['backbone', 'underscore', 'jquery', 'hammer-jquery'],
   function (Backbone, _, $) {
-    "use strict";
+    'use strict';
 
     function getFirstTouchPosition(gesture) {
       if (gesture && gesture.touches && gesture.touches[0]) {
@@ -13,29 +13,29 @@ define(["backbone", "underscore", "jquery", "hammer-jquery"],
 
     return Backbone.View.extend({
 
-      el: "<span/>",
+      el: '<span/>',
       $ghost: null,
-      color: "",
+      color: '',
 
       events: {
-        "dragstart": "dragStart",
-        "dragend": "dragEnd",
-        "drag": "dragging"
+        'dragstart': 'dragStart',
+        'dragend': 'dragEnd',
+        'drag': 'dragging'
       },
 
       initialize: function (options) {
-        if(!options.model) {
-          throw (new Error("can't initialize peg without model"));
+        if (!options.model) {
+          throw (new Error('can\'t initialize peg without model'));
         }
         this.model = options.model;
-        this.model.on("change", this.render, this);
+        this.model.on('change', this.render, this);
       },
 
       render: function () {
         this.$el.hammer();
-        if(this.model.get("visible")) {
+        if (this.model.get('visible')) {
           this.$el.show();
-          this.$el.attr("class", "peg " + this.model.get("color"));
+          this.$el.attr('class', 'peg ' + this.model.get('color'));
         } else {
           this.$el.hide();
         }
@@ -50,7 +50,7 @@ define(["backbone", "underscore", "jquery", "hammer-jquery"],
         if (ev.gesture) {
           this.$ghost = this.$el
             .clone()
-            .addClass("ghost")
+            .addClass('ghost')
             .appendTo(document.body);
           this.dragging(ev);
         }
@@ -61,12 +61,12 @@ define(["backbone", "underscore", "jquery", "hammer-jquery"],
        * @param ev
        */
       dragEnd: function (ev) {
-        if(ev.gesture) {
+        if (ev.gesture) {
           ev.gesture.preventDefault();
           this.$ghost.remove();
           var position = getFirstTouchPosition(ev.gesture),
             dropTarget = document.elementFromPoint(position.clientX, position.clientY);
-          $(dropTarget).trigger("drop", this);
+          $(dropTarget).trigger('drop', this);
         }
       },
 

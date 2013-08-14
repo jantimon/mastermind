@@ -1,8 +1,8 @@
 /* global define:false */
 
-define(["backbone", "underscore", "mastermind/model/peg"],
+define(['backbone', 'underscore', 'mastermind/model/peg'],
   function (Backbone, _, PegModel) {
-    "use strict";
+    'use strict';
 
     return Backbone.Collection.extend({
       model: PegModel,
@@ -11,10 +11,10 @@ define(["backbone", "underscore", "mastermind/model/peg"],
        * Returns the color count for all colors of this set
        * @return {color:number}
        */
-      getColorCount: function() {
+      getColorCount: function () {
         var colors = {};
-        this.each(function(peg){
-          var color = peg.get("color");
+        this.each(function (peg) {
+          var color = peg.get('color');
           colors[color] = 1 + (colors[color] || 0);
         });
         return colors;
@@ -24,7 +24,7 @@ define(["backbone", "underscore", "mastermind/model/peg"],
        * Returns an array of hints
        *
        * @param anotherPegSet
-       * @returns ["black"|"white"|false, ...]
+       * @returns ['black'|'white'|false, ...]
        */
       getMatches: function (anotherPegSet) {
         var hints = [];
@@ -34,10 +34,10 @@ define(["backbone", "underscore", "mastermind/model/peg"],
 
         // Get correct positions
         _.each(_.range(pegSet.length), function (peg, i) {
-          var color = pegSet.at(i).get("color");
+          var color = pegSet.at(i).get('color');
           var counterPeg = anotherPegSet.at(i);
-          if (counterPeg && counterPeg.get("color") === color) {
-            hints.push("black");
+          if (counterPeg && counterPeg.get('color') === color) {
+            hints.push('black');
             pegColors[color]--;
             secretColors[color]--;
           }
@@ -46,8 +46,8 @@ define(["backbone", "underscore", "mastermind/model/peg"],
         // Get correct colors
         _.each(pegColors, function (count, color) {
           var colorMatches = Math.min(count, (secretColors[color] || 0));
-          _.each(_.range(colorMatches), function (i) {
-            hints.push("white");
+          _.each(_.range(colorMatches), function () {
+            hints.push('white');
           });
         });
 
@@ -64,9 +64,9 @@ define(["backbone", "underscore", "mastermind/model/peg"],
        * @param anotherPegSet
        * @returns {boolean}
        */
-      isPerfectMatch : function(anotherPegSet){
-        return !this.any(function(peg, i){
-          return peg.get("color") !== anotherPegSet.at(i).get("color");
+      isPerfectMatch: function (anotherPegSet) {
+        return !this.any(function (peg, i) {
+          return peg.get('color') !== anotherPegSet.at(i).get('color');
         });
       }
 

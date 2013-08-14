@@ -1,43 +1,78 @@
 /* global define: false, require: false */
 
 // Define App
-define("bootstrap", [
-  "backbone",
-  "jquery",
-  "router",
-  "underscore",
-  "mastermind/view/decodingBoard",
-  "mastermind/model/level"],
+define('bootstrap', [
+  'backbone',
+  'jquery',
+  'router',
+  'underscore',
+  'mastermind/view/decodingBoard',
+  'mastermind/model/level'],
   function (Backbone, $, router, _, MastermindView, Level) {
-    "use strict";
+    'use strict';
 
-    router().on("route:game", function () {
+    var gameView;
+    var levelConfiguration = {
+      // Level 1
+      1: {cols: 4, colors: ['black', 'white']},
+      // Level 2
+      2 : {cols: 4},
+      // Level 3
+      3 : {cols: 5}
+    };
 
-      var level = new Level();
+    router().on('route:default', function() {
+      this.navigate('level/1', {trigger: true, replace: true});
+
+    });
+
+    router().on('route:game', function (level) {
+
+      if(isNaN(level) || !levelConfiguration[level]) {
+        // Default level:
+        this.navigate('level/1', {trigger: true, replace: true});
+        return;
+      }
+
+      var levelModel = new Level(levelConfiguration[level]);
+      levelModel.reset();
+
+      // Destroy old view
+      if (gameView) {
+        gameView.remove();
+      }
 
       // View
-      var view = new MastermindView({
-        level: level
+      gameView = new MastermindView({
+        level: levelModel
       });
-      view.$el.appendTo(document.body);
-      view.render();
+      gameView.$el.appendTo(document.body);
+      gameView.render();
 
       // Game over event:
-      level.on("change:gameOver",function(change){
-        if(level.get("gameOver")) {
-          setTimeout(function(){
-            level.reset();
-            level.generateSecretCombination();
-          }, 3000);
+      levelModel.on('change:gameOver', function (change) {
+        if (levelModel.get('gameOver')) {
+          setTimeout(_.bind(function () {
+            if(levelModel.isWon()) {
+              // Go to the next level!!
+              router().navigate('level/' + (parseInt(level, 10) + 1), {trigger: true});
+            } else {
+              // Try this level again
+              levelModel.reset();
+              levelModel.generateSecretCombination();
+            }
+          }, this), 3500);
         }
       });
 
-    }, 500);
+    });
 
     // Start router
-    Backbone.history.start();
+    Backbone.history.start({
+      pushState: false
+    });
 
   });
 
 // Launch app
-require(["bootstrap"]);
+require(['bootstrap']);
