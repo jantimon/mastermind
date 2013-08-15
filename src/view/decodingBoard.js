@@ -15,39 +15,6 @@ define(['backbone', 'underscore', 'jquery', 'mastermind/view/peg', 'mastermind/v
         this.level.on('change', this.render, this);
       },
 
-      events: {
-        'guess-complete': 'guessComplete'
-      },
-
-      /**
-       * Handle the guess-complete event
-       */
-      guessComplete: function () {
-        var currentRow = this.level.get('currentRow');
-        var guessRows = this.level.get('guessRows');
-
-        // Disable the completed guess row:
-        this.level.getCurrentGuessRow().set('enabled', false);
-
-        // End the game if the player found the correct solution
-        if (this.level.getCurrentGuessRow().get('pegs').isPerfectMatch(this.level.get('secretCombination'))) {
-          this.level.set('gameOver', true);
-        }
-        // Go on with the next row or mark the game as lost
-        else {
-          currentRow--;
-          // Enable the guess row if there is at least one left
-          if (guessRows[currentRow]) {
-            this.level.set('currentRow', currentRow);
-            guessRows[currentRow].set('enabled', true);
-          }
-          // End the game if there are now guess rows left
-          else {
-            this.level.set('gameOver', true);
-          }
-        }
-      },
-
       /**
        * Renders the template html
        */
@@ -71,7 +38,7 @@ define(['backbone', 'underscore', 'jquery', 'mastermind/view/peg', 'mastermind/v
 
         // Map dom elements with views
         _.map(this.$('.guess'), _.bind(function (guess, i) {
-          var guessView = new GuessRowView({ guess: guessRows[i], cols: this.level.get('cols') });
+          var guessView = new GuessRowView({ guess: guessRows.at(i), cols: this.level.get('cols') });
           guessView.setElement(guess);
           guessView.render();
           return guessView;
@@ -79,7 +46,7 @@ define(['backbone', 'underscore', 'jquery', 'mastermind/view/peg', 'mastermind/v
 
         // Map dom elements with views
         _.map(this.$('.hint'), _.bind(function (hint, i) {
-          var hintView = new HintRowView({ guess: guessRows[i], cols: this.level.get('cols'), secretCombination: this.level.get('secretCombination') });
+          var hintView = new HintRowView({ guess: guessRows.at(i), cols: this.level.get('cols'), secretCombination: this.level.get('secretCombination') });
           hintView.setElement(hint);
           hintView.render();
           return hintView;
