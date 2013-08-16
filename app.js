@@ -4,7 +4,7 @@
 define('bootstrap', [
   'backbone',
   'router',
-  'mastermind/controller/level',
+  'mastermind/controller/level'
   ],
   function (Backbone, router, levelController) {
     'use strict';
@@ -13,7 +13,7 @@ define('bootstrap', [
       this.navigate('level/1', {trigger: true, replace: true});
     });
 
-    router().on('route:game', levelController);
+    router().on('route:game', levelController.routeHandler);
 
     // Start router
     Backbone.history.start({

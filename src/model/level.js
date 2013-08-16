@@ -49,7 +49,7 @@ define(['backbone',
         // Disable and clear all rows
         this.initializeGuessRows();
         // Enable the last row
-        this.get('guessRows').at(this.get('rows') - 1).set('state', GuessModel.states.Changeable);
+        this.get('guessRows').last().set('state', GuessModel.states.Changeable);
         // Generate new combination
         this.generateSecretCombination();
       },
@@ -106,19 +106,19 @@ define(['backbone',
        */
       getCurrentGuessRow: function () {
         return this.get('guessRows').find(function (guessRow) {
-          return guessRow.get('state') === GuessModel.states.Changeable;
+          return !guessRow.isLocked();
         });
       },
 
       /**
-       * Returns the next row
+       * Returns the row above the first not locked row
        *
        * @returns GuessModel|false
        */
       getNextRow: function () {
         var i = -1, index = -1;
         this.get('guessRows').find(function (guessRow) {
-          if (guessRow.isFull()) {
+          if (!guessRow.isLocked()) {
             index = i++;
             return true;
           } else {
@@ -134,14 +134,7 @@ define(['backbone',
        * @returns boolean
        */
       isWon: function () {
-        if(!this.get('gameOver')) {
-          return false;
-        }
-        var complete = this.get('guessRows').find(function (guessRow) {
-          return guessRow.get('state') === GuessModel.states.Confirmed;
-        });
-
-        return complete && complete.isCorrect(this.get('secretCombination'));
+        return this.get('gameOver') && this.getCurrentGuessRow().isCorrect(this.get('secretCombination'));
       }
 
     });

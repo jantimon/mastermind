@@ -19,16 +19,31 @@ define(['underscore',
       3: {cols: 5}
     };
 
-    return function (level) {
-      var router = this;
+    /**
+     * Turns a levelIndex into a levelModel
+     * @param level
+     * @returns LevelModel||false
+     */
+    function initialize(level) {
       if (isNaN(level) || !levelConfiguration[level]) {
-        // Default level:
-        router.navigate('level/1', {trigger: true, replace: true});
-        return;
+        return false;
+      } else {
+        var levelModel = new LevelModel(levelConfiguration[level]);
+        levelModel.reset();
+        return levelModel;
       }
+    }
 
-      var levelModel = new LevelModel(levelConfiguration[level]);
-      levelModel.reset();
+
+    /**
+     * Controller main function
+     *
+     * @param levelModel
+     * @param level
+     */
+    function execute(levelModel, level) {
+      /*jshint validthis:true */
+      var router = this;
 
       // Destroy old view
       if (gameView) {
@@ -43,7 +58,7 @@ define(['underscore',
       gameView.render();
 
       // Game row status changes
-      levelModel.get('guessRows').on('change:state', function(guessRow){
+      levelModel.get('guessRows').on('change:state', function (guessRow) {
         switch (guessRow.get('state')) {
           case GuessRowModel.states.Locked :
             break;
@@ -55,18 +70,17 @@ define(['underscore',
           case GuessRowModel.states.Confirmed :
 
             // Check if the game is one
-            if(guessRow.isCorrect(levelModel.get('secretCombination'))) {
+            if (guessRow.isCorrect(levelModel.get('secretCombination'))) {
               levelModel.set('gameOver', true);
             } else {
               // Enable the guess row if there is at least one left
               var nextRow = levelModel.getNextRow();
-              if(nextRow) {
+              if (nextRow) {
                 nextRow.set('state', GuessRowModel.states.Changeable);
               } else {
                 levelModel.set('gameOver', true);
               }
             }
-
             break;
         }
       });
@@ -87,6 +101,30 @@ define(['underscore',
           }, this), 3500);
         }
       });
+    }
 
+    /**
+     * Backbone router handler
+     *
+     * @param level
+     */
+    function routeHandler(level) {
+      /*jshint validthis:true */
+      var router = this;
+      var levelModel = initialize(level);
+      if (levelModel) {
+        // Start level:
+        execute.call(router, levelModel, level);
+      } else {
+        // Default level:
+        router.navigate('level/1', {trigger: true, replace: true});
+      }
+    }
+
+    return {
+      initialize: initialize,
+      execute: execute,
+      routeHandler: routeHandler
     };
+
   });
