@@ -4,15 +4,16 @@ define(['backbone',
   'underscore',
   'mastermind/model/peg',
   'mastermind/model/guess',
-  'mastermind/collection/pegSet'],
-  function (Backbone, _, PegModel, GuessModel, PegSetCollection) {
+  'mastermind/collection/pegSet',
+  'mastermind/collection/guessRows'],
+  function (Backbone, _, PegModel, GuessModel, PegSetCollection, GuessRowCollection) {
     'use strict';
 
     return Backbone.Model.extend({
       defaults: {
         cols: 4,
         rows: 8,
-        guessRows: null,
+        guessRows: false,
         secretCombination: new PegSetCollection(),
         colors: null,
         currentRow: null,
@@ -47,9 +48,8 @@ define(['backbone',
         this.set('gameOver', false);
         // Disable and clear all rows
         this.initializeGuessRows();
-        // Enable last row
-        this.set('currentRow', this.get('rows') - 1);
-        this.getCurrentGuessRow().set('enabled', true);
+        // Enable the last row
+        this.get('guessRows').last().set('state', GuessModel.states.Changeable);
         // Generate new combination
         this.generateSecretCombination();
       },
@@ -66,7 +66,10 @@ define(['backbone',
           }
           guessRows.push(new GuessModel({pegs: pegSet}));
         }
-        this.set('guessRows', guessRows);
+        if (!this.get('guessRows')) {
+          this.set('guessRows', new GuessRowCollection());
+        }
+        this.get('guessRows').reset(guessRows);
       },
 
 
@@ -102,7 +105,28 @@ define(['backbone',
        * @returns GuessModel
        */
       getCurrentGuessRow: function () {
-        return this.get('guessRows')[this.get('currentRow')];
+        return this.get('guessRows').find(function (guessRow) {
+          return !guessRow.isLocked();
+        });
+      },
+
+      /**
+       * Returns the row above the first not locked row
+       *
+       * @returns GuessModel|false
+       */
+      getNextRow: function () {
+        var i = -1, index = -1;
+        this.get('guessRows').find(function (guessRow) {
+          if (!guessRow.isLocked()) {
+            index = i++;
+            return true;
+          } else {
+            i++;
+            return false;
+          }
+        });
+        return index >= 0 ? this.get('guessRows').at(index) : false;
       },
 
       /**
@@ -110,7 +134,7 @@ define(['backbone',
        * @returns boolean
        */
       isWon: function () {
-        return this.get('gameOver') && this.getCurrentGuessRow().get('pegs').isPerfectMatch(this.get('secretCombination'));
+        return this.get('gameOver') && this.getCurrentGuessRow().isCorrect(this.get('secretCombination'));
       }
 
     });

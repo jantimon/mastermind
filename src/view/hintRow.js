@@ -19,7 +19,7 @@ define(['backbone', 'underscore', 'jquery', 'mastermind/view/peg', 'mastermind/c
        */
       render: function () {
         // Render pegs
-        if (this.guess.isFull() && this.guess.get('enabled') === false) {
+        if (this.guess.isFull() && this.guess.isConfirmed()) {
 
           // Replace empty hints with 'hole'
           var hints = _.map(this.guess.get('pegs').getMatches(this.secretCombination), function (hint) {

@@ -1,7 +1,14 @@
 /* global define:false */
 
-define(['backbone', 'underscore', 'jquery', 'mastermind/view/peg', 'mastermind/collection/pegSet', 'tpl!templates/guessRow.tpl'],
-  function (Backbone, _, $, PegView, PegSet, template) {
+define(['backbone',
+  'underscore',
+  'jquery',
+  'mastermind/view/peg',
+  'mastermind/model/guess',
+  'mastermind/collection/pegSet',
+  'tpl!templates/guessRow.tpl'],
+
+  function (Backbone, _, $, PegView, GuessRowModel, PegSet, template) {
     'use strict';
 
     return Backbone.View.extend({
@@ -25,7 +32,7 @@ define(['backbone', 'underscore', 'jquery', 'mastermind/view/peg', 'mastermind/c
        * @param draggedPegView
        */
       drop: function (event, draggedPegView) {
-        if (draggedPegView instanceof PegView && this.model.get('enabled')) {
+        if (draggedPegView instanceof PegView && this.model.isChangeable()) {
           var index = this.$('.pegContainer').index(event.currentTarget);
           var draggedPegModel = draggedPegView.model;
           this.model.get('pegs').at(index).set({
@@ -33,9 +40,8 @@ define(['backbone', 'underscore', 'jquery', 'mastermind/view/peg', 'mastermind/c
             visible: true,
             color: draggedPegModel.get('color')
           });
-          // This might need a confirmation:
           if (this.model.isFull()) {
-            this.$el.trigger('guess-complete');
+            this.model.set('state', GuessRowModel.states.Complete);
           }
         }
       },
@@ -61,8 +67,8 @@ define(['backbone', 'underscore', 'jquery', 'mastermind/view/peg', 'mastermind/c
         // classes
         this.$el.toggleClass('empty', this.model.isEmpty());
         this.$el.toggleClass('full', this.model.isFull());
-        this.$el.toggleClass('enabled', this.model.get('enabled'));
-        this.$el.toggleClass('disabled', !this.model.get('enabled'));
+        this.$el.toggleClass('enabled', this.model.isChangeable());
+        this.$el.toggleClass('disabled', !this.model.isChangeable());
       }
 
     });
