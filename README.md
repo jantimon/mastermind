@@ -5,9 +5,9 @@ mastermind
 
 The game is played using:
 
-+ a decoding board, with a shield at one end covering a row of four large holes, and twelve (or ten, or eight) additional rows containing four large holes next to a set of four small holes;
++ a decoding board, with a shield at one end covering a row of four large holes, and eight additional rows containing four large holes next to a set of four small holes;
 
-+ code pegs of six (or more; see Variations below) different colors, with round heads, which will be placed in the large holes on the board; and  
++ code pegs of two or five different colors, with round heads, which will be placed in the large holes on the board; and
 
 + key pegs, some colored or black, some white, which are flat-headed and smaller than the code pegs; they will be placed in the small holes on the board.
 
