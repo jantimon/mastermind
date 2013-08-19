@@ -97,6 +97,7 @@ define(['underscore',
               // Try this level again
               levelModel.reset();
               levelModel.generateSecretCombination();
+              gameView.render();
             }
           }, this), 3500);
         }
