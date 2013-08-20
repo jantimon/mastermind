@@ -90,14 +90,13 @@ define(['underscore',
       levelModel.on('change:gameOver', function () {
         if (levelModel.get('gameOver')) {
           setTimeout(_.bind(function () {
+            var currentLevel = parseInt(level, 10);
             if (levelModel.isWon()) {
               // Go to the next level!!
-              router.navigate('level/' + (parseInt(level, 10) + 1), {trigger: true});
+              router.navigate('level/' + (currentLevel + 1), {trigger: true});
             } else {
               // Try this level again
-              levelModel.reset();
-              levelModel.generateSecretCombination();
-              gameView.render();
+              router.refresh();
             }
           }, this), 3500);
         }

@@ -12,7 +12,7 @@ define(['backbone', 'underscore', 'jquery', 'mastermind/view/peg', 'mastermind/v
       initialize: function (options) {
         this.level = options.level;
         this.$el.addClass('decoding-board');
-        this.level.on('change', this.render, this);
+        this.listenTo(this.level, 'change', this.render);
       },
 
       /**
