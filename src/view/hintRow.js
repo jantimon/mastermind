@@ -10,7 +10,7 @@ define(['backbone', 'underscore', 'jquery', 'mastermind/view/peg', 'mastermind/c
 
       initialize: function (options) {
         this.guess = options.guess;
-        this.guess.on('change', this.render, this);
+        this.listenTo(this.guess, 'change', this.render);
         this.secretCombination = options.secretCombination;
       },
 

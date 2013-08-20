@@ -22,8 +22,8 @@ define(['backbone',
       initialize: function (options) {
         this.model = options.guess;
         this.cols = options.cols;
-        this.model.on('change', this.render, this);
-        this.model.get('pegs').on('change', this.render, this);
+        this.listenTo(this.model, 'change', this.render);
+        this.listenTo(this.model.get('pegs'), 'change', this.render);
       },
 
       /**
